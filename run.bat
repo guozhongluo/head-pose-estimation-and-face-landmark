@@ -1,0 +1,1 @@
+python landmarkPredict.py predictImage  testList.txt
