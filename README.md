@@ -23,6 +23,10 @@ if using dlib18.18, you can follow the [official instruction](http://dlib.net/)
 
 - You can download the pre-trained model from [here](http://pan.baidu.com/s/1c14aFyK)  
 
+## Train
+
+- add train.prototxt and train_solver.prototxt files, Training using the 300W data set
+
 ## Result
 ![](result/1.png)
 ![](result/2.png)
