@@ -7,6 +7,13 @@ import cv2
 import caffe
 
 def retifyxxyy(img, xxyy):
+    """
+    let xxyy within image size
+    img: image
+    xxyy: left, right, top, bottom
+    return modified xxyy
+    """
+
     img_height, img_width = img.shape[:2]
     xxyy = retifyxxyysize(img_height, img_width, xxyy)
     return xxyy
@@ -16,6 +23,7 @@ def retifyxxyysize(img_height, img_width, xxyy):
     img_height:
     img_width:
     xxyy:
+    return xxyy
     """
 
     xxyy[0] = max(xxyy[0], 0)
@@ -49,8 +57,6 @@ def getCutSize(xxyy, left, right, top, bottom):   #left, right, top, and bottom
     return cut_size
 
 
-
-
 def dets2xxyys(dets):
     """
     In this module
@@ -68,6 +74,17 @@ def dets2xxyys(dets):
 class FacePosePredictor(object):
     """
     A face Pose Predcitor using pre-trained caffe model.
+
+    The orignal code was modified to class version.
+
+    https://github.com/guozhongluo/head-pose-estimation-and-face-landmark
+
+Example:
+
+    posePredictor = facePose.FacePosePredictor()
+    predictpoints, landmarks, headposes = posePredictor.predict(frameCopy, np.array([[left, right, top, bottom]]))
+
+
     """
 
     def __init__(self):
@@ -96,6 +113,11 @@ class FacePosePredictor(object):
         predcit pitch yaw, roll for each rectangle.
         colorImage:
         xxyys: list of rectangle
+
+        return
+        predictpoints: 68 point
+        landmarks:
+        predictposes: pitch yaw roll
         """
 
 
@@ -176,6 +198,10 @@ class FacePosePredictor(object):
         predcit pitch yaw, roll for single rectangle.
         colorImage:
         xxyy: single rectangle
+
+        return value
+        predictposes[0, :] : pitch, yaw, roll
+
         """
         predictpoints, landmarks, predictposes = self.predict(colorImage, np.array([xxyy]))
 
