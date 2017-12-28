@@ -148,6 +148,8 @@ def getCutSize(bbox,left,right,top,bottom):   #left, right, top, and bottom
     return cut_size
 
 
+getTestPart = getRGBTestPart
+
 def getFaceImage(image,bboxs,left,right,top,bottom,height,width):
     num = bboxs.shape[0]
     faces = np.zeros((num,channels,height,width))
