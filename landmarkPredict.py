@@ -6,8 +6,6 @@ import sys
 import numpy as np
 import cv2
 
-import facePose 
-
 caffe_root = 'D:/caffe/caffe-windows-master/'
 sys.path.insert(0, caffe_root + 'python')
 import caffe
@@ -148,8 +146,6 @@ def getCutSize(bbox,left,right,top,bottom):   #left, right, top, and bottom
     return cut_size
 
 
-getTestPart = getRGBTestPart
-
 def getFaceImage(image,bboxs,left,right,top,bottom,height,width):
     num = bboxs.shape[0]
     faces = np.zeros((num,channels,height,width))
@@ -162,7 +158,6 @@ def getFaceImage(image,bboxs,left,right,top,bottom,height,width):
 
 def detectFace(img):
     detector = dlib.get_frontal_face_detector()
-    assert img is not None
     dets = detector(img,1)
     bboxs = np.zeros((len(dets),4))
     for i, d in enumerate(dets):
@@ -188,9 +183,6 @@ def predictImage(filename):
     a = caffe.io.caffe_pb2.BlobProto.FromString(proto_data)
     mean = caffe.io.blobproto_to_array(a)[0]
 
-    detector = dlib.get_frontal_face_detector()
-    posePredictor = facePose.FacePosePredictor()
-
     while line:
         print index
         line = line.strip()
@@ -198,8 +190,6 @@ def predictImage(filename):
         imgPath = info[0]
         print imgPath
         num = 1
-        assert os.path.isfile(imgPath)
-        assert os.path.getsize(imgPath) > 0
         colorImage = cv2.imread(imgPath)
         bboxs = detectFace(colorImage)
         faceNum = bboxs.shape[0]
@@ -231,13 +221,6 @@ def predictImage(filename):
             blobName = 'poselayer'
             pose_prediction = vgg_point_net.blobs[blobName].data
             predictpose[i] = pose_prediction * 50
-
-
-        numUpSampling = 0
-        dets, scores, idx = detector.run(colorImage, numUpSampling)
-        bboxs = facePose.dets2xxyys(dets)
-
-        predictpoints, landmarks, predictpose = posePredictor.predict(colorImage, bboxs)
 
         predictpoints = predictpoints * vgg_height/2 + vgg_width/2
         level1Point = batchRecoverPart(predictpoints,bboxs,TotalSize,M_left,M_right,M_top,M_bottom,vgg_height,vgg_width)
