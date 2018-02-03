@@ -22,7 +22,7 @@ pose_name = ['Pitch', 'Yaw', 'Roll']     # respect to  ['head down','out of plan
 outDir = os.path.expanduser("~/output")
 cropDir = os.path.expanduser("~/crop")
 
-def show_image(img, landmarks, bboxs, headposes, enableSampling=True):
+def show_image(img, landmarks, bboxs, headposes, enableSampling=False):
     u"""
     img:
     landmarks: landmark points
