@@ -18,6 +18,7 @@ if using dlib18.18, you can follow the [official instruction](http://dlib.net/)
 - Command : python landmarkPredict.py predictImage  testList.txt<p>
 (testList.txt is a file contain the path of the images.)
 
+- Command :  python landmarkPredict_video.py  0
 
 ## Model
 
@@ -31,13 +32,3 @@ if using dlib18.18, you can follow the [official instruction](http://dlib.net/)
 ![](result/1.png)
 ![](result/2.png)
 ![](result/3.png)
-
-
----
-
-## fork version only
-
-$ python landmarkPredict_video.py
-usage: landmarkPredict_video.py uvcID
-
-$ python landmarkPredict_video.py  0
