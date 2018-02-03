@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=C0103
 # pylint: disable=E1101
-#usage :python landmarkPredict.py predictVideo  testList.txt
 
 import os
 import sys
@@ -23,7 +22,7 @@ pose_name = ['Pitch', 'Yaw', 'Roll']     # respect to  ['head down','out of plan
 outDir = os.path.expanduser("~/output")
 cropDir = os.path.expanduser("~/crop")
 
-def show_image(img, landmarks, bboxs, headposes):
+def show_image(img, landmarks, bboxs, headposes, enableSampling=True):
     u"""
     img:
     landmarks: landmark points
@@ -72,26 +71,27 @@ def show_image(img, landmarks, bboxs, headposes):
         assert ntop < nbottom
         assert nleft < nright
 
-        datetimeStr = time.strftime("%Y%m%d_%H%M%S", time.localtime())
+        if enableSampling:
+            datetimeStr = time.strftime("%Y%m%d_%H%M%S", time.localtime())
 
-        subImg3 = librect.sizedCrop(orgImg, (nleft, ntop, nright, nbottom))
-        cropName3 = os.path.join(cropPyDir, "%s_%s_b.png" % (pyrStr, datetimeStr))
-        cv2.imwrite(cropName3, subImg3)
+            subImg3 = librect.sizedCrop(orgImg, (nleft, ntop, nright, nbottom))
+            cropName3 = os.path.join(cropPyDir, "%s_%s_b.png" % (pyrStr, datetimeStr))
+            cv2.imwrite(cropName3, subImg3)
 
 
-        pngname = os.path.join(outPyDir, "%s_%s.jpg" % (pyrStr, datetimeStr))
-        cv2.imwrite(pngname, orgImg)
+            pngname = os.path.join(outPyDir, "%s_%s.jpg" % (pyrStr, datetimeStr))
+            cv2.imwrite(pngname, orgImg)
 
-    if landmarks.shape[0] < 1:
-        pyrDir = "couldNotDetect"
-        pyrDir = os.path.join(outDir, pyrDir)
-        if not os.path.isdir(pyrDir):
-            os.makedirs(pyrDir)
+            if landmarks.shape[0] < 1:
+                pyrDir = "couldNotDetect"
+                pyrDir = os.path.join(outDir, pyrDir)
+                if not os.path.isdir(pyrDir):
+                    os.makedirs(pyrDir)
 
-        datetimeStr = time.strftime("%Y%m%d_%H%M%S", time.localtime())
-        pngname = os.path.join(pyrDir, "%s.jpg" % datetimeStr)
-        cv2.imwrite(pngname, orgImg)
-        print pngname
+                datetimeStr = time.strftime("%Y%m%d_%H%M%S", time.localtime())
+                pngname = os.path.join(pyrDir, "%s.jpg" % datetimeStr)
+                cv2.imwrite(pngname, orgImg)
+                print pngname
 
 
     height, width = img.shape[:2]
