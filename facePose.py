@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 # pylint: disable=C0103
+# pylint: disable=E1101
+
 import os
 import numpy as np
 import cv2
@@ -64,11 +66,11 @@ def dets2xxyys(dets):
     """
     xxyys = np.zeros((len(dets), 4))
     for i, d in enumerate(dets):
-        xxyys[i, 0] = d.left();
-        xxyys[i, 1] = d.right();
-        xxyys[i, 2] = d.top();
-        xxyys[i, 3] = d.bottom();
-    return xxyys;
+        xxyys[i, 0] = d.left()
+        xxyys[i, 1] = d.right()
+        xxyys[i, 2] = d.top()
+        xxyys[i, 3] = d.bottom()
+    return xxyys
 
 
 class FacePosePredictor(object):
@@ -174,8 +176,8 @@ Example:
             point = np.zeros(np.shape(landmarks))
             cut_width = largetxxyy[1] - largetxxyy[0]
             cut_height = largetxxyy[3] - largetxxyy[2]
-            scale_x = cut_width*1.0/width;
-            scale_y = cut_height*1.0/height;
+            scale_x = cut_width*1.0/width
+            scale_y = cut_height*1.0/height
             point[0::2] = [float(j * scale_x + largetxxyy[0]) for j in landmarks[0::2]]
             point[1::2] = [float(j * scale_y + largetxxyy[2]) for j in landmarks[1::2]]
             return point
