@@ -56,29 +56,6 @@ def overlapRectArea(rect1, rect2):
         area >= 0.0
         return area
 
-def test_overlapRegion():
-    lim = overlapRange([0, 10], [0, 10])
-    assert lim == [0, 10]
-    lim = overlapRange([0, 10], [0, 20])
-    assert lim == [0, 10]
-    lim = overlapRange([0, 10], [-10, 20])
-    assert lim == [0, 10]
-
-
-    lim = overlapRange([0, 10], [5, 10])
-    assert lim == [5, 10]
-
-    lim = overlapRange([0, 10], [5, 20])
-    assert lim == [5, 10]
-
-    lim = overlapRange([-10, 10], [5, 20])
-    assert lim == [5, 10]
-
-
-    lim = overlapRange([5, 10], [5, 20])
-    assert lim == [5, 10]
-
-
 def getIoU(rect1, rect2):
     u"""
     return intersection  over union
@@ -94,22 +71,6 @@ def getIoU(rect1, rect2):
     IoU = intersection/float(union)
     assert IoU >= 0
     return IoU
-
-
-def test_getIoU():
-    IoU = getIoU([10, 20, 30, 40], [10, 20, 30, 40])
-    print IoU
-    assert IoU == 1.0
-
-    IoU = getIoU([10, 20, 30, 40], [10, 20, 30, 20])
-    print IoU
-    assert IoU <= 0.5+0.01
-    assert 0.5 - 0.01 <= IoU
-
-    IoU = getIoU([10, 20, 30, 40], [10, 25, 30, 40])
-    print IoU
-    assert IoU < 1.0
-    assert IoU >= 0.0
 
 
 def rect2bbox(rect):
@@ -183,3 +144,47 @@ def sizedCrop(img, xyxy):
     pilsubImg = pilImg.crop(xyxy)
     subImg = np.asarray(pilsubImg)
     return subImg
+
+
+def test_overlapRegion():
+    lim = overlapRange([0, 10], [0, 10])
+    assert lim == [0, 10]
+    lim = overlapRange([0, 10], [0, 20])
+    assert lim == [0, 10]
+    lim = overlapRange([0, 10], [-10, 20])
+    assert lim == [0, 10]
+
+
+    lim = overlapRange([0, 10], [5, 10])
+    assert lim == [5, 10]
+
+    lim = overlapRange([0, 10], [5, 20])
+    assert lim == [5, 10]
+
+    lim = overlapRange([-10, 10], [5, 20])
+    assert lim == [5, 10]
+
+
+    lim = overlapRange([5, 10], [5, 20])
+    assert lim == [5, 10]
+
+
+def test_getIoU():
+    IoU = getIoU([10, 20, 30, 40], [10, 20, 30, 40])
+    print IoU
+    assert IoU == 1.0
+
+    IoU = getIoU([10, 20, 30, 40], [10, 20, 30, 20])
+    print IoU
+    assert IoU <= 0.5+0.01
+    assert 0.5 - 0.01 <= IoU
+
+    IoU = getIoU([10, 20, 30, 40], [10, 25, 30, 40])
+    print IoU
+    assert IoU < 1.0
+    assert IoU >= 0.0
+
+
+if __name__ == "__main__":
+    test_overlapRegion()
+    test_getIoU()
