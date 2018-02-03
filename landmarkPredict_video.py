@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 # pylint: disable=C0103
+# pylint: disable=E1101
 #usage :python landmarkPredict.py predictVideo  testList.txt
 
 import os
@@ -121,7 +122,7 @@ def predictVideo(uvcID):
             continue
 
         numUpSampling = 0
-        dets, scores, idx = detector.run(colorImage, numUpSampling)
+        dets, _, _ = detector.run(colorImage, numUpSampling)
         bboxs = facePose.dets2xxyys(dets)
 
         predictpoints, landmarks, predictpose = posePredictor.predict(colorImage, bboxs)
