@@ -101,7 +101,7 @@ def show_image(img, landmarks, bboxs, headposes, enableSampling=False):
         radius = min(height_radius, width_radius)
         img = cv2.resize(img, (0, 0), fx=radius, fy=radius)
 
-    cv2.imshow("img", img)
+    cv2.imshow("headPose and landmark q:quit", img)
 
 
 
@@ -114,7 +114,7 @@ def predictVideo(uvcID):
     posePredictor = facePose.FacePosePredictor()
 
     cap = cv2.VideoCapture(uvcID)
-    cv2.namedWindow("img", cv2.WINDOW_NORMAL)
+    cv2.namedWindow("headPose and landmark q:quit", cv2.WINDOW_NORMAL)
 
     while True:
         ok, colorImage = cap.read()
