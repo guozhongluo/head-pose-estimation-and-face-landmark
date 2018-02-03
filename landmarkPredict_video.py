@@ -8,8 +8,8 @@ import sys
 import time
 import cv2
 import dlib # http://dlib.net
-import librect
 
+import librect
 import facePose
 
 """

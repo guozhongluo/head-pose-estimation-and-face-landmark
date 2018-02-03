@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=C0103
 import numpy as np
-import PIL.Image
+import PIL.Image # https://github.com/python-pillow/Pillow
 
 def largestRect(rects):
     u"""retturn largest rect in rects
