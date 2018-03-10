@@ -6,11 +6,11 @@
 import os
 import sys
 import time
-import cv2
+import cv2 # OpenCV
 import dlib # http://dlib.net
 
-import librect
-import facePose
+import librect # helper function for rectangles.
+import facePose # class based rewrite of landmarkPredict.
 
 """
 In this module
@@ -32,6 +32,7 @@ def show_image(img, landmarks, bboxs, headposes, enableSampling=False):
         When the value of pitch becomes large, it becomes an image with chin pulled down or an image looked down from above.
         When the value of yaw increases, the face direction becomes to face the left side of the image.
         When the value of roll becomes large, the face is inclined clockwise.
+    enableSampling: If True, save croppped face image.
     """
 
     orgImg = img+0
