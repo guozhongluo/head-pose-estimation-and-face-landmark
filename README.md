@@ -29,7 +29,7 @@ usage: landmarkPredict_video.py uvcID
 
 ## Model
 
-- You can download the pre-trained model from [here](http://pan.baidu.com/s/1c14aFyK)  
+- You can download the pre-trained model from [here](http://pan.baidu.com/s/1c14aFyK)
 
 ## Train
 
@@ -40,8 +40,10 @@ usage: landmarkPredict_video.py uvcID
 ![](result/2.png)
 ![](result/3.png)
 
-
+---
 ## class based rewrite for the landmarkPredict.
 facePos.py: FacePosePredictor class is defined.
 
 librect.py: helper functions for rectangles.
+
+landmarkPredict_video.py uses this class version.
