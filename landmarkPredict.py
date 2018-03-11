@@ -78,6 +78,7 @@ def getRGBTestPart(bbox,left,right,top,bottom,img,height,width):
     # cv2.rectangle(img, (int(retiBBox[0]), int(retiBBox[2])), (int(retiBBox[1]), int(retiBBox[3])), (0,0,255), 2)
     # cv2.imshow('f',img)
     # cv2.waitKey(0)
+    retiBBox = [int(round(x)) for x in retiBBox]
     face=img[retiBBox[2]:retiBBox[3],retiBBox[0]:retiBBox[1],:]
 	#cv2.imshow('f', face)
 	#cv2.waitkey(0)

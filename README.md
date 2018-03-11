@@ -13,15 +13,23 @@ cd python_example<p>
 if using dlib18.18, you can follow the [official instruction](http://dlib.net/)
 - opencv<p>
 
-## Usage
+## Usage for images
 
 - Command : python landmarkPredict.py predictImage  testList.txt<p>
 (testList.txt is a file contain the path of the images.)
 
 
+## Usage for usb camera
+This sctpt enables you to see intractive results for this face-landmark-localization.
+
+usage: landmarkPredict_video.py uvcID
+
+
+- Command :  python landmarkPredict_video.py  0
+
 ## Model
 
-- You can download the pre-trained model from [here](http://pan.baidu.com/s/1c14aFyK)  
+- You can download the pre-trained model from [here](http://pan.baidu.com/s/1c14aFyK)
 
 ## Train
 
@@ -31,3 +39,11 @@ if using dlib18.18, you can follow the [official instruction](http://dlib.net/)
 ![](result/1.png)
 ![](result/2.png)
 ![](result/3.png)
+
+---
+## class based rewrite for the landmarkPredict.
+facePos.py: FacePosePredictor class is defined.
+
+librect.py: helper functions for rectangles.
+
+landmarkPredict_video.py uses this class version.
